@@ -70,7 +70,7 @@ const Bar = ({ data: d }) => {
       <div>
         <NivoBar
           width={width - width * 0.1}
-          height={height - height * 1}
+          height={height - height * 0.3}
           layout="horizontal"
           margin={{ top: 26, right: 120, bottom: 26, left: 100 }}
           data={data}
