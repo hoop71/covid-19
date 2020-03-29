@@ -44,27 +44,31 @@ const Line = () => {
     <StaticQuery
       query={graphql`
         query line {
-          allUsStatesCsv(filter: { date: { gte: "2020-03-27" } }) {
+          allUsStatesCsv(filter: { date: { gte: "2020-03-15" } }) {
             nodes {
+              id
+              date
               state
+              deaths
               cases
             }
           }
         }
       `}
       render={data => {
-        const nivoData = [
-          {
-            id: "Cases By State",
-            data: data.allUsStatesCsv.nodes.map(n => {
-              return {
-                x: getStateValueByKey("name", n.state, "abbreviation"),
-                y: n.cases,
-                id: n.id,
-              }
-            }),
-          },
-        ]
+        debugger
+        const nivoData = _.slice(
+          _.map(
+            _.groupBy(data.allUsStatesCsv.nodes, "state"),
+            (state, name) => ({
+              id: name,
+              data: state.map(s => ({ x: s.date, y: s.cases, id: s.id })),
+            })
+          ),
+          0,
+          10
+        )
+        console.log(nivoData)
         return <MyResponsiveLine data={nivoData} width={width} />
       }}
     />
@@ -81,6 +85,7 @@ export default Line
 const MyResponsiveLine = ({ data, width }) => (
   <ResponsiveLine
     data={data}
+    curve="monotoneX"
     margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
     xScale={{ type: "point" }}
     yScale={{

@@ -5,7 +5,8 @@ import React from "react"
 import { makeStyles } from "@material-ui/core"
 
 // Components
-import LineGraph from "../components/hoop/line-graph"
+// import LineGraph from "../components/hoop/line-graph"
+import BarRace from "../components/hoop/bar_race"
 
 const useStyles = makeStyles({
   wrapper: {
@@ -18,7 +19,8 @@ const Hoop = () => {
   const classes = useStyles()
   return (
     <div className={classes.wrapper}>
-      <LineGraph />
+      {/* <LineGraph /> */}
+      <BarRace />
     </div>
   )
 }
