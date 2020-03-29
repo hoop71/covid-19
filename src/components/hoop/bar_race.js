@@ -1,5 +1,9 @@
 // React
-import React, { useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
+
+import { BarRaceContext } from "../../pages/hoop"
+// Material
+import { makeStyles } from "@material-ui/core"
 
 import { Bar as NivoBar } from "@nivo/bar"
 import { StaticQuery, graphql } from "gatsby"
@@ -55,49 +59,54 @@ const BarComponent = props => {
 }
 
 const Bar = ({ data: d }) => {
+  const { width } = useContext(BarRaceContext)
   const { data, date } = d
   return (
     <React.Fragment>
       <h2 style={{ marginLeft: 60, fontWeight: 400, color: "#555" }}>
         Cases By State By Date:
-        <strong style={{ color: "black", fontWeight: 900 }}>{date}</strong>
+        <strong
+          style={{ color: "black", fontWeight: 900 }}
+        >{` ${date}`}</strong>
       </h2>
-      <NivoBar
-        width={800}
-        height={500}
-        layout="horizontal"
-        margin={{ top: 26, right: 120, bottom: 26, left: 60 }}
-        data={data}
-        indexBy="id"
-        keys={["cases"]}
-        colors={{ scheme: "spectral" }}
-        colorBy="indexValue"
-        borderColor={{ from: "color", modifiers: [["darker", 2.6]] }}
-        enableGridX
-        enableGridY={false}
-        axisTop={{
-          format: "~s",
-        }}
-        axisBottom={{
-          format: "~s",
-        }}
-        axisLeft={null}
-        padding={0.3}
-        labelTextColor={{ from: "color", modifiers: [["darker", 1.4]] }}
-        isInteractive={false}
-        barComponent={BarComponent}
-        motionStiffness={170}
-        motionDamping={26}
-      />
+      <div>
+        <NivoBar
+          width={width}
+          height={500}
+          layout="horizontal"
+          margin={{ top: 26, right: 120, bottom: 26, left: 100 }}
+          data={data}
+          indexBy="id"
+          keys={["cases"]}
+          colors={{ scheme: "spectral" }}
+          colorBy="indexValue"
+          borderColor={{ from: "color", modifiers: [["darker", 2.6]] }}
+          enableGridX
+          enableGridY={false}
+          axisTop={{
+            format: "~s",
+          }}
+          axisBottom={{
+            legend: "cases",
+          }}
+          axisLeft={null}
+          padding={0.3}
+          labelTextColor={{ from: "color", modifiers: [["darker", 1.4]] }}
+          isInteractive={false}
+          barComponent={BarComponent}
+          motionStiffness={170}
+          motionDamping={26}
+        />
+      </div>
     </React.Fragment>
   )
 }
 
-const BarDataWrapper = ({ data }) => {
+const BarDataWrapper = ({ data, width }) => {
   const [current, setCurrent] = useState(0)
   useEffect(() => {
     let timer
-    if (current === data.length) {
+    if (current === data.length - 1) {
       timer = setTimeout(() => {
         setCurrent(0)
       }, 1400)
@@ -113,7 +122,7 @@ const BarDataWrapper = ({ data }) => {
   const sliced = _.slice(sorted, 0, 10)
   const ordered = sliced.reverse()
 
-  return <Bar data={{ ...data[current], data: ordered }} />
+  return <Bar data={{ ...data[current], data: ordered }} width={width} />
 }
 
 const BarRace = () => {
