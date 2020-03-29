@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `Covid 19`,
+    title: `Covid 19 Charts`,
     description: `Plz Don't Die`,
     author: `@hoop71`,
   },
