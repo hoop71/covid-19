@@ -18,7 +18,10 @@ const StateDropDown = () => (
       }
     `}
     render={data => {
-      console.log(data)
+      const nivoData = data.allUsStatesCsv.nodes.map(n => {
+        return { x: n.state, y: n.cases }
+      })
+      console.log(nivoData)
       return (
         <header>
           <h1>here</h1>

@@ -1,13 +1,26 @@
 // React
 import React from "react"
 
-import StateDropDown from "../components/hoop/state_drop_down"
+// Material
+import { makeStyles } from "@material-ui/core"
 
-const Hoop = () => (
-  <React.Fragment>
-    <h1>I am Hoop</h1>
-    <StateDropDown />
-  </React.Fragment>
-)
+// Components
+import LineGraph from "../components/hoop/line-graph"
+
+const useStyles = makeStyles({
+  wrapper: {
+    height: "90vh",
+    padding: "3em 2em",
+  },
+})
+
+const Hoop = () => {
+  const classes = useStyles()
+  return (
+    <div className={classes.wrapper}>
+      <LineGraph />
+    </div>
+  )
+}
 
 export default Hoop
