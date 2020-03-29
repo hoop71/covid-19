@@ -1,7 +1,7 @@
 import React, { useContext } from "react"
 
 // Context
-import { BarRaceContext } from "../../../pages/hoop"
+import { DisplayContext } from "../../../pages/hoop"
 
 // Components
 import { Bar as NivoBar } from "@nivo/bar"
@@ -9,6 +9,9 @@ import BarComponent from "./bar_component"
 
 // Material
 import { makeStyles } from "@material-ui/core"
+
+// Libraries
+import _ from "lodash"
 
 const useStyles = makeStyles({
   wrapper: {
@@ -18,14 +21,14 @@ const useStyles = makeStyles({
   },
 })
 
-const Bar = ({ data: groupedData }) => {
-  const { height, width } = useContext(BarRaceContext)
+const Bar = ({ data: groupedData, display }) => {
+  const { height, width } = useContext(DisplayContext)
   const classes = useStyles()
   const { data, date } = groupedData
   return (
     <div className={classes.wrapper}>
       <h2>
-        Cases By State By Date:
+        {`${_.startCase(display)} By State By Date`}
         <strong
           style={{ color: "black", fontWeight: 900 }}
         >{` ${date}`}</strong>
@@ -38,7 +41,7 @@ const Bar = ({ data: groupedData }) => {
           margin={{ top: 26, right: 120, bottom: 26, left: 100 }}
           data={data}
           indexBy="id"
-          keys={["cases"]}
+          keys={["value"]}
           colors={{ scheme: "spectral" }}
           colorBy="indexValue"
           borderColor={{ from: "color", modifiers: [["darker", 2.6]] }}

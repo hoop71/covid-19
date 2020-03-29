@@ -9,7 +9,7 @@ import { makeStyles } from "@material-ui/core"
 // import LineGraph from "../components/hoop/line-graph"
 import BarRace from "../components/hoop/bar_race"
 
-export const BarRaceContext = createContext({})
+export const DisplayContext = createContext({})
 
 const useStyles = makeStyles({
   wrapper: {
@@ -26,11 +26,11 @@ const Hoop = () => {
   const { height, width } = useWindowSize()
   const classes = useStyles({ height, width })
   return (
-    <BarRaceContext.Provider value={{ height, width }}>
+    <DisplayContext.Provider value={{ height, width }}>
       <div className={classes.wrapper}>
         <BarRace />
       </div>
-    </BarRaceContext.Provider>
+    </DisplayContext.Provider>
   )
 }
 

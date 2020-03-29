@@ -1,5 +1,5 @@
 // React
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useMemo } from "react"
 
 // Gatsby
 import { StaticQuery, graphql } from "gatsby"
@@ -10,8 +10,13 @@ import Bar from "./bar"
 // Libraries
 import _ from "lodash"
 
+// const sortByDisplayValue = (a, b) => {
+//   return sort((a, b) => b[display] - a[display])
+// }
+
 const BarDataWrapper = ({ data, width }) => {
   const [current, setCurrent] = useState(0)
+  const [display, setDisplay] = useState("deaths")
   useEffect(() => {
     let timer
     if (current === data.length - 1) {
@@ -24,16 +29,29 @@ const BarDataWrapper = ({ data, width }) => {
       }, 1400)
     }
     return () => clearTimeout(timer)
-  }, [current, setCurrent, data.length])
+  }, [current, setCurrent, data.length, display])
 
-  const sorted = data[current].data.sort((a, b) => b.cases - a.cases)
-  const sliced = _.slice(sorted, 0, 10)
-  const ordered = sliced.reverse()
+  const byDisplay = _.map(data, (values, key) => {
+    return {
+      date: key,
+      data: _.slice(
+        _.map(values, (value, key) => ({
+          id: value.state,
+          value: value[display],
+          state: value.state,
+        })).sort((a, b) => b.value - a.value),
+        0,
+        10
+      ).reverse(),
+    }
+  })
 
-  return <Bar data={{ ...data[current], data: ordered }} width={width} />
+  // // sort by most cases
+  console.log(byDisplay[current])
+  return <Bar data={byDisplay[current]} display={display} width={width} />
 }
 
-const BarRace = () => {
+const BarRace = ({ display }) => {
   return (
     <StaticQuery
       query={graphql`
@@ -50,22 +68,8 @@ const BarRace = () => {
         }
       `}
       render={data => {
-        const byDate = _.groupBy(data.allUsStatesCsv.nodes, "date")
-
         return (
-          <BarDataWrapper
-            data={_.map(byDate, (date, key) => {
-              return {
-                date: key,
-                data: date.map(d => ({
-                  id: d.state,
-                  cases: d.cases,
-                  value: d.cases,
-                  deaths: d.deaths,
-                })),
-              }
-            })}
-          />
+          <BarDataWrapper data={_.groupBy(data.allUsStatesCsv.nodes, "date")} />
         )
       }}
     />
