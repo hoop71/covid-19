@@ -1,21 +1,48 @@
+// React
 import React from "react"
-import { Link } from "gatsby"
 
+// Gatsby
+import { graphql, Link } from "gatsby"
+
+// Components
 import Layout from "../components/layout"
-import Image from "../components/image"
 import SEO from "../components/seo"
 
-const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link>
-  </Layout>
-)
+// Material
+import { makeStyles } from "@material-ui/core"
+
+const useStyles = makeStyles({
+  linkWrapper: {
+    display: "flex",
+    justifyContent: "space-around",
+  },
+})
+
+const IndexPage = ({ data }) => {
+  const classes = useStyles()
+  return (
+    <Layout>
+      <SEO title="Home" />
+      <div className={classes.linkWrapper}>
+        <Link to="/elijah/" activeStyle={{ color: "red" }}>
+          Elijah
+        </Link>
+        <Link to="/hoop/" activeStyle={{ color: "red" }}>
+          Hoop
+        </Link>
+      </div>
+    </Layout>
+  )
+}
 
 export default IndexPage
+
+export const index_query = graphql`
+  query index_query {
+    allUsCountiesCsv(
+      filter: { date: { gte: "03/20/2020" }, state: { eq: "Colorado" } }
+    ) {
+      totalCount
+    }
+  }
+`
