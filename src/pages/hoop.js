@@ -26,7 +26,7 @@ const Hoop = () => {
   const { height, width } = useWindowSize()
   const classes = useStyles({ height, width })
   return (
-    <BarRaceContext.Provider value={{ width }}>
+    <BarRaceContext.Provider value={{ height, width }}>
       <div className={classes.wrapper}>
         <BarRace />
       </div>
