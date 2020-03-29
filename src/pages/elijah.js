@@ -1,6 +1,13 @@
 // React
 import React from "react"
 
-const Elijah = () => <h1>I am Elijah</h1>
+import App from "../components/elijah"
+
+const Elijah = () => (
+  <div>
+    <h1>United States Counties</h1>
+    <App />
+  </div>
+)
 
 export default Elijah
