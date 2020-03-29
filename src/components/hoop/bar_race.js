@@ -2,8 +2,6 @@
 import React, { useContext, useEffect, useState } from "react"
 
 import { BarRaceContext } from "../../pages/hoop"
-// Material
-import { makeStyles } from "@material-ui/core"
 
 import { Bar as NivoBar } from "@nivo/bar"
 import { StaticQuery, graphql } from "gatsby"
@@ -59,7 +57,7 @@ const BarComponent = props => {
 }
 
 const Bar = ({ data: d }) => {
-  const { width } = useContext(BarRaceContext)
+  const { height, width } = useContext(BarRaceContext)
   const { data, date } = d
   return (
     <React.Fragment>
@@ -83,9 +81,6 @@ const Bar = ({ data: d }) => {
           borderColor={{ from: "color", modifiers: [["darker", 2.6]] }}
           enableGridX
           enableGridY={false}
-          axisTop={{
-            format: "~s",
-          }}
           axisBottom={{
             legend: "cases",
           }}
@@ -116,7 +111,7 @@ const BarDataWrapper = ({ data, width }) => {
       }, 1400)
     }
     return () => clearTimeout(timer)
-  }, [current, setCurrent])
+  }, [current, setCurrent, data.length])
 
   const sorted = data[current].data.sort((a, b) => b.cases - a.cases)
   const sliced = _.slice(sorted, 0, 10)
