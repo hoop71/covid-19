@@ -7,12 +7,6 @@ import { useWindowSize } from "@reach/window-size"
 import { Bar as NivoBar } from "@nivo/bar"
 import BarComponent from "./bar_component"
 
-import { makeStyles } from "@material-ui/core"
-
-const useStyles = makeStyles({
-  wrapper: { height: ({ height }) => height * 0.7, minHeight: "30vh" },
-})
-
 const Bar = ({
   atLeastOneToDisplay,
   data: groupedData,
@@ -20,11 +14,13 @@ const Bar = ({
   setDisplay,
 }) => {
   const { height, width } = useWindowSize()
-  const classes = useStyles({ height })
 
   const { data } = groupedData
   return (
-    <div id="needs fixed height" className={classes.wrapper}>
+    <div
+      id="needs fixed height"
+      style={{ height: height * 0.7, minHeight: "30vh" }}
+    >
       {atLeastOneToDisplay ? (
         <NivoBar
           width={width * 0.9}
