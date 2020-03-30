@@ -16,11 +16,9 @@ const useStyles = makeStyles({
     justifyContent: "center",
     flexDirection: "column",
     height: ({ height }) => {
-      console.log("Styles height", height)
-      return { height: height - 50 }
+      return { height: height - 100 }
     },
     width: ({ width }) => {
-      console.log("Styles width", width)
       return { width: width - width * 0.1 }
     },
   },
