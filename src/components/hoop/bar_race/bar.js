@@ -17,7 +17,10 @@ const Bar = ({
   console.log(`Height: ${height} and Width: ${width}`)
   const { data } = groupedData
   return (
-    <div>
+    <div
+      id="needs fixed height"
+      style={{ height: height * 0.7, minHeight: "30vh" }}
+    >
       {atLeastOneToDisplay ? (
         <NivoBar
           width={width - width * 0.1}

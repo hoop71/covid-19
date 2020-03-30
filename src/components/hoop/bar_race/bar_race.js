@@ -31,7 +31,7 @@ const useBarDataWrapperStyles = makeStyles(() => ({
 }))
 
 const BarDataWrapper = ({ data, height }) => {
-  const classes = useBarDataWrapperStyles()
+  const classes = useBarDataWrapperStyles({ height })
   const [display, setDisplay] = useState("cases")
   const [startDate, setStartDate] = useState(fiveDaysAgo)
   const currentDisplay = useTimer({ data, startDate, display })
