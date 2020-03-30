@@ -1,5 +1,5 @@
 // React
-import React, { useEffect, useState, useMemo } from "react"
+import React, { useEffect, useState } from "react"
 
 // Gatsby
 import { StaticQuery, graphql } from "gatsby"
@@ -10,16 +10,12 @@ import Bar from "./bar"
 // Libraries
 import _ from "lodash"
 
-// const sortByDisplayValue = (a, b) => {
-//   return sort((a, b) => b[display] - a[display])
-// }
-
 const BarDataWrapper = ({ data, width }) => {
   const [current, setCurrent] = useState(0)
-  const [display, setDisplay] = useState("deaths")
+  const [display, setDisplay] = useState("cases")
   useEffect(() => {
     let timer
-    if (current === data.length - 1) {
+    if (current === data.length - 2) {
       timer = setTimeout(() => {
         setCurrent(0)
       }, 1400)
@@ -34,6 +30,8 @@ const BarDataWrapper = ({ data, width }) => {
   const byDisplay = _.map(data, (values, key) => {
     return {
       date: key,
+      total_deaths: values.reduce((a, b) => a + b.deaths),
+      total_cases: values.reduce((a, b) => a + b.cases),
       data: _.slice(
         _.map(values, (value, key) => ({
           id: value.state,
@@ -45,10 +43,18 @@ const BarDataWrapper = ({ data, width }) => {
       ).reverse(),
     }
   })
+  console.log(display)
 
-  // // sort by most cases
-  console.log(byDisplay[current])
-  return <Bar data={byDisplay[current]} display={display} width={width} />
+  const atLeastOneToDisplay =
+    byDisplay[current].data.reduce((r, c) => r + parseInt(c.value), 0) > 0
+  return (
+    <Bar
+      atLeastOneToDisplay={atLeastOneToDisplay}
+      data={byDisplay[current]}
+      display={display}
+      setDisplay={setDisplay}
+    />
+  )
 }
 
 const BarRace = ({ display }) => {
