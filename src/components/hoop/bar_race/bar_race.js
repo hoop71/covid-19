@@ -15,7 +15,6 @@ const BarDataWrapper = ({ data, height }) => {
   const [display, setDisplay] = useState("cases")
   useEffect(() => {
     let timer
-    debugger
     if (current === _.size(data) - 1) {
       timer = setTimeout(() => {
         setCurrent(0)
