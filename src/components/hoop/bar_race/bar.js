@@ -31,6 +31,7 @@ const Bar = ({
   const { height, width } = useContext(DisplayContext)
   const classes = useStyles()
   const { data, date } = groupedData
+  console.log("bar aLOTD: ", atLeastOneToDisplay)
   return (
     <div className={classes.wrapper}>
       <ToggleContainer display={display} setDisplay={setDisplay} />
