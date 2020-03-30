@@ -1,39 +1,49 @@
 import React from "react"
 
 // Material
-import Button from "@material-ui/core/Button"
+import { makeStyles } from "@material-ui/core"
+import ButtonGroup from "@material-ui/core/ButtonGroup"
+import IconButton from "@material-ui/core/IconButton"
 import Tooltip from "@material-ui/core/Tooltip"
 
-// Library
-import _ from "lodash"
+// Icons
+import { GiDeathSkull, GiPlagueDoctorProfile } from "react-icons/gi"
+
+const useStyles = makeStyles({
+  wrapper: {
+    marginTop: "2em",
+  },
+})
 
 const ToggleContainer = ({ display, setDisplay }) => {
-  const handleSetDisplay = (e, v) => {
-    setDisplay(_.toLower(e.target.innerText))
+  const classes = useStyles()
+
+  const handleOnClick = displayName => {
+    setDisplay(displayName)
   }
 
   return (
-    <div>
+    <ButtonGroup className={classes.wrapper}>
       <Tooltip title="Show Cases" placement="top">
-        <Button
-          onClick={e => handleSetDisplay(e)}
+        <IconButton
+          onClick={() => handleOnClick("cases")}
           id="cases"
           value="cases"
           style={{ background: display === "cases" ? "#a8a8a8" : "" }}
         >
-          Cases
-        </Button>
+          <GiPlagueDoctorProfile />
+        </IconButton>
       </Tooltip>
       <Tooltip title="Show Deaths" placement="top">
-        <Button
-          onClick={handleSetDisplay}
+        <IconButton
+          onClick={() => handleOnClick("deaths")}
           value="deaths"
           style={{ background: display === "deaths" ? "#a8a8a8" : "" }}
         >
-          Deaths
-        </Button>
+          <GiDeathSkull />
+        </IconButton>
       </Tooltip>
-    </div>
+    </ButtonGroup>
   )
 }
 

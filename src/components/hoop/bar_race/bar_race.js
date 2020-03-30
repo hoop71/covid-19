@@ -44,6 +44,7 @@ const BarDataWrapper = ({ data, height }) => {
   console.log(display)
 
   const atLeastOneToDisplay =
+    byDisplay[current] &&
     byDisplay[current].data &&
     byDisplay[current].data.reduce((r, c) => r + parseInt(c.value), 0) > 0
 
