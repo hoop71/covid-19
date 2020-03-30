@@ -11,12 +11,12 @@ import SEO from "../components/seo"
 // Material
 import { makeStyles } from "@material-ui/core"
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(() => ({
   linkWrapper: {
     display: "flex",
     justifyContent: "space-around",
   },
-})
+}))
 
 const IndexPage = ({ data }) => {
   const classes = useStyles()

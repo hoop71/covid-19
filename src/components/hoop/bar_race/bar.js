@@ -14,13 +14,13 @@ import { makeStyles } from "@material-ui/core"
 // Libraries
 import _ from "lodash"
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(() => ({
   wrapper: {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
   },
-})
+}))
 
 const Bar = ({
   atLeastOneToDisplay,
