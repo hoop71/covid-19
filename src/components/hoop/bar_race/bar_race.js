@@ -1,58 +1,64 @@
 // React
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 
 // Gatsby
 import { StaticQuery, graphql } from "gatsby"
 
 // Components
 import Bar from "./bar"
+import DatePicker from "./date_picker"
+import ToggleContainer from "./toggle_container"
+
+// Material
+import { makeStyles } from "@material-ui/core"
+import Paper from "@material-ui/core/Paper"
+
+// Custom Hooks
+import { useTimer } from "./hooks"
 
 // Libraries
 import _ from "lodash"
 
+const fiveDaysInMillisecons = 4.32e8
+const fiveDaysAgo = new Date(new Date() - fiveDaysInMillisecons)
+
+const useBarDataWrapperStyles = makeStyles(() => ({
+  wrapper: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+}))
+
 const BarDataWrapper = ({ data, height }) => {
-  const [current, setCurrent] = useState(0)
+  const classes = useBarDataWrapperStyles()
   const [display, setDisplay] = useState("cases")
-  useEffect(() => {
-    let timer
-    if (current === _.size(data) - 1) {
-      timer = setTimeout(() => {
-        setCurrent(0)
-      }, 1500)
-    } else {
-      timer = setTimeout(() => {
-        setCurrent(current + 1)
-      }, 800)
-    }
-    return () => clearTimeout(timer)
-  }, [current, setCurrent, data, display, height])
+  const [startDate, setStartDate] = useState(fiveDaysAgo)
+  const currentDisplay = useTimer({ data, startDate, display })
 
-  const byDisplay = _.map(data, (values, key) => {
-    return {
-      date: key,
-      data: _.slice(
-        _.map(values, (value, key) => ({
-          id: value.state,
-          value: value[display],
-          state: value.state,
-        })).sort((a, b) => b.value - a.value),
-        0,
-        10
-      ).reverse(),
-    }
-  })
-
-  // Do we at least have some data to show?
-  const atLeastOneToDisplay =
-    byDisplay[current].data.reduce((r, c) => r + parseInt(c.value), 0) > 0
+  // Do we at least have some data to showp?
+  const atLeastOneToDisplay = _.size(currentDisplay)
 
   return (
-    <Bar
-      atLeastOneToDisplay={atLeastOneToDisplay}
-      data={byDisplay[current]}
-      display={display}
-      setDisplay={setDisplay}
-    />
+    <Paper>
+      <div className={classes.wrapper}>
+        <ToggleContainer display={display} setDisplay={setDisplay} />
+        <DatePicker startDate={startDate} setStartDate={setStartDate} />
+        <h2>
+          {`${_.startCase(display)} By State By Date`}
+          <strong style={{ color: "black", fontWeight: 900 }}>{` ${_.get(
+            currentDisplay,
+            "date"
+          )}`}</strong>
+        </h2>
+      </div>
+      <Bar
+        atLeastOneToDisplay={atLeastOneToDisplay}
+        data={currentDisplay}
+        display={display}
+        setDisplay={setDisplay}
+      />
+    </Paper>
   )
 }
 
@@ -61,9 +67,7 @@ const BarRace = ({ display }) => {
     <StaticQuery
       query={graphql`
         query barRace {
-          allUsStatesCsv(
-            filter: { date: { gte: "2020-03-26" }, children: {} }
-          ) {
+          allUsStatesCsv {
             nodes {
               id
               date
