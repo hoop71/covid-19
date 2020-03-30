@@ -31,7 +31,14 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `data`,
-        path: `${__dirname}/src/data/`,
+        path: `${__dirname}/node_modules/covid-19-data/us-counties.csv`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `data`,
+        path: `${__dirname}/node_modules/covid-19-data/us-states.csv`,
       },
     },
     `gatsby-transformer-csv`,

@@ -1,4 +1,4 @@
-import { format } from "date-fns"
+import "date-fns"
 import React from "react"
 import DateFnsUtils from "@date-io/date-fns"
 
