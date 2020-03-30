@@ -10,7 +10,7 @@ import Bar from "./bar"
 // Libraries
 import _ from "lodash"
 
-const BarDataWrapper = ({ data, width }) => {
+const BarDataWrapper = ({ data, height }) => {
   const [current, setCurrent] = useState(0)
   const [display, setDisplay] = useState("cases")
   useEffect(() => {
@@ -25,7 +25,7 @@ const BarDataWrapper = ({ data, width }) => {
       }, 1400)
     }
     return () => clearTimeout(timer)
-  }, [current, setCurrent, data, display])
+  }, [current, setCurrent, data, display, height])
 
   const byDisplay = _.map(data, (values, key) => {
     return {

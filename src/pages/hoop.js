@@ -29,7 +29,7 @@ const Hoop = () => {
   return (
     <DisplayContext.Provider value={{ height, width }}>
       <div className={classes.wrapper}>
-        <BarRace />
+        <BarRace height={height} />
       </div>
     </DisplayContext.Provider>
   )
