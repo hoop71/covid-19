@@ -15,14 +15,15 @@ const BarDataWrapper = ({ data, height }) => {
   const [display, setDisplay] = useState("cases")
   useEffect(() => {
     let timer
-    if (current === data.length - 2) {
+    debugger
+    if (current === _.size(data) - 1) {
       timer = setTimeout(() => {
         setCurrent(0)
-      }, 1400)
+      }, 1500)
     } else {
       timer = setTimeout(() => {
         setCurrent(current + 1)
-      }, 1400)
+      }, 800)
     }
     return () => clearTimeout(timer)
   }, [current, setCurrent, data, display, height])
@@ -41,14 +42,11 @@ const BarDataWrapper = ({ data, height }) => {
       ).reverse(),
     }
   })
-  console.log(display)
 
+  // Do we at least have some data to show?
   const atLeastOneToDisplay =
-    byDisplay[current] &&
-    byDisplay[current].data &&
     byDisplay[current].data.reduce((r, c) => r + parseInt(c.value), 0) > 0
 
-  console.log(atLeastOneToDisplay)
   return (
     <Bar
       atLeastOneToDisplay={atLeastOneToDisplay}
@@ -64,7 +62,9 @@ const BarRace = ({ display }) => {
     <StaticQuery
       query={graphql`
         query barRace {
-          allUsStatesCsv {
+          allUsStatesCsv(
+            filter: { date: { gte: "2020-03-26" }, children: {} }
+          ) {
             nodes {
               id
               date
