@@ -38,7 +38,8 @@ const BarDataWrapper = ({ data, height }) => {
 
   // Do we at least have some data to showp?
   const atLeastOneToDisplay = _.size(currentDisplay)
-
+  console.log(`currentDisplay`)
+  console.log(currentDisplay)
   return (
     <Paper>
       <div className={classes.wrapper}>
