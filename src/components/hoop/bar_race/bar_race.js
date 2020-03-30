@@ -38,9 +38,12 @@ const BarDataWrapper = ({ data }) => {
       <TopPanel>
         <ToggleContainer display={display} setDisplay={setDisplay} />
         <DatePicker startDate={startDate} setStartDate={setStartDate} />
-        <TypographyPanel displayDate={parseHumanDate(currentDisplay)}>
+        <TypographyPanel>
           <Typography variant="subtitle1">
             {`${_.startCase(display)} By State By Date: `}
+          </Typography>
+          <Typography variant="subtitle1">
+            {`${parseHumanDate(currentDisplay)}`}
           </Typography>
         </TypographyPanel>
       </TopPanel>

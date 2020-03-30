@@ -4,9 +4,6 @@ import React from "react"
 // Material
 import { makeStyles } from "@material-ui/core"
 
-// Libraries
-import ReactTextTransition from "react-text-transition"
-
 const useTypographyPanelStyles = makeStyles({
   wrapper: {
     width: "100%",
@@ -17,18 +14,7 @@ const useTypographyPanelStyles = makeStyles({
 
 export const TypographyPanel = ({ children, displayDate }) => {
   const classes = useTypographyPanelStyles()
-  return (
-    <div className={classes.wrapper}>
-      {children}
-      <ReactTextTransition
-        direction="down"
-        style={{ display: "inline" }}
-        text={displayDate}
-        order={1}
-        spring={{ stiffness: 50, damping: 20 }}
-      />
-    </div>
-  )
+  return <div className={classes.wrapper}>{children}</div>
 }
 
 const useStyles = makeStyles({
