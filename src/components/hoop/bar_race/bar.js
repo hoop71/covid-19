@@ -1,7 +1,7 @@
-import React, { useContext } from "react"
+import React from "react"
 
 // Context
-import { DisplayContext } from "../../../pages/hoop"
+import { useWindowSize } from "@reach/window-size"
 
 // Components
 import { Bar as NivoBar } from "@nivo/bar"
@@ -13,7 +13,8 @@ const Bar = ({
   display,
   setDisplay,
 }) => {
-  const { height, width } = useContext(DisplayContext)
+  const { height, width } = useWindowSize()
+  console.log(`Height: ${height} and Width: ${width}`)
   const { data } = groupedData
   return (
     <div>

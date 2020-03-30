@@ -1,5 +1,5 @@
 // React
-import React, { createContext } from "react"
+import React from "react"
 import { useWindowSize } from "@reach/window-size"
 
 // Material
@@ -8,8 +8,6 @@ import { makeStyles } from "@material-ui/core"
 // Components
 // import LineGraph from "../components/hoop/line-graph"
 import BarRace from "../components/hoop/bar_race"
-
-export const DisplayContext = createContext({})
 
 const useStyles = makeStyles({
   wrapper: {
@@ -27,11 +25,9 @@ const Hoop = () => {
   const classes = useStyles({ height, width })
   console.log(classes.wrapper)
   return (
-    <DisplayContext.Provider value={{ height, width }}>
-      <div className={classes.wrapper}>
-        <BarRace height={height} />
-      </div>
-    </DisplayContext.Provider>
+    <div className={classes.wrapper}>
+      <BarRace height={height} />
+    </div>
   )
 }
 
