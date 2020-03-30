@@ -12,9 +12,9 @@ import BarRace from "../components/hoop/bar_race"
 const useStyles = makeStyles({
   wrapper: {
     display: "flex",
+    padding: "2em",
     justifyContent: "center",
     flexDirection: "column",
-    marginLeft: "50px",
     height: ({ height }) => {
       console.log("Styles height", height)
       return { height: height - 50 }
@@ -29,10 +29,9 @@ const useStyles = makeStyles({
 const Hoop = () => {
   const { height, width } = useWindowSize()
   const classes = useStyles({ height, width })
-  console.log(classes.wrapper)
   return (
     <div className={classes.wrapper}>
-      <BarRace height={height} />
+      <BarRace />
     </div>
   )
 }

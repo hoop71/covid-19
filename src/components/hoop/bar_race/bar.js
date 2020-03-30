@@ -18,7 +18,6 @@ const Bar = ({
     `Height: ${height - height * 0.3} and Width: ${width - width * 0.1}`
   )
   const { data } = groupedData
-  console.log()
   return (
     <div
       id="needs fixed height"
@@ -29,7 +28,7 @@ const Bar = ({
           width={width * 0.9 || "70vw"}
           height={height * 0.7 || "70vh"}
           layout="horizontal"
-          margin={{ top: 26, right: 120, bottom: 26, left: 100 }}
+          margin={{ top: 50, right: 120, bottom: 100, left: 220 }}
           data={data}
           indexBy="id"
           keys={["value"]}
@@ -50,7 +49,7 @@ const Bar = ({
           motionDamping={26}
         />
       ) : (
-        <h1 style={{ height: height - height * 0.3 }}>
+        <h1 style={{ height: height * 0.7 || "30vh" }}>
           No Cases Reported For This Date
         </h1>
       )}

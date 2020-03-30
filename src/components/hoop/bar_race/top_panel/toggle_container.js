@@ -9,22 +9,24 @@ import Tooltip from "@material-ui/core/Tooltip"
 // Icons
 import { GiDeathSkull, GiPlagueDoctorProfile } from "react-icons/gi"
 
-const toggledOn = { background: "#a8a8a8", color: "white" }
-
 const useStyles = makeStyles({
   wrapper: {
     marginTop: "2em",
   },
-  casesIconButton: ({ display }) => {
-    if (display === "cases") {
-      return toggledOn
-    }
-  },
-  deathIconButton: ({ display }) => {
-    if (display === "deaths") {
-      return toggledOn
-    }
-  },
+  casesIconButton: ({ display }) => ({
+    background: display === "cases" ? "#a8a8a8" : "",
+    color: display === "cases" ? "#fff" : "#d4d4d4",
+    "&:hover": {
+      color: "#a8a8a8",
+    },
+  }),
+  deathIconButton: ({ display }) => ({
+    background: display === "deaths" ? "#a8a8a8" : "",
+    color: display === "deaths" ? "#fff" : "#d4d4d4",
+    "&:hover": {
+      color: "#a8a8a8",
+    },
+  }),
 })
 
 const ToggleContainer = ({ display, setDisplay }) => {

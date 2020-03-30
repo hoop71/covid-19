@@ -6,53 +6,44 @@ import { StaticQuery, graphql } from "gatsby"
 
 // Components
 import Bar from "./bar"
-import DatePicker from "./date_picker"
-import ToggleContainer from "./toggle_container"
+import TopPanel, {
+  DatePicker,
+  ToggleContainer,
+  TypographyPanel,
+} from "./top_panel"
 
 // Material
-import { makeStyles } from "@material-ui/core"
 import Paper from "@material-ui/core/Paper"
+import Typography from "@material-ui/core/Typography"
 
 // Custom Hooks
-import { useTimer } from "./hooks"
+import { useTimer } from "./utils/hooks"
 
 // Libraries
 import _ from "lodash"
 
-const fiveDaysInMillisecons = 4.32e8
-const fiveDaysAgo = new Date(new Date() - fiveDaysInMillisecons)
+// Utils
+import { fiveDaysAgo, parseHumanDate } from "./utils"
 
-const useBarDataWrapperStyles = makeStyles(() => ({
-  wrapper: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-}))
-
-const BarDataWrapper = ({ data, height }) => {
-  const classes = useBarDataWrapperStyles({ height })
+const BarDataWrapper = ({ data }) => {
   const [display, setDisplay] = useState("cases")
   const [startDate, setStartDate] = useState(fiveDaysAgo)
   const currentDisplay = useTimer({ data, startDate, display })
 
   // Do we at least have some data to showp?
   const atLeastOneToDisplay = _.size(currentDisplay)
-  console.log(`currentDisplay`)
-  console.log(currentDisplay)
+
   return (
-    <Paper>
-      <div className={classes.wrapper}>
+    <Paper elevation={4}>
+      <TopPanel>
         <ToggleContainer display={display} setDisplay={setDisplay} />
         <DatePicker startDate={startDate} setStartDate={setStartDate} />
-        <h2>
-          {`${_.startCase(display)} By State By Date`}
-          <strong style={{ color: "black", fontWeight: 900 }}>{` ${_.get(
-            currentDisplay,
-            "date"
-          )}`}</strong>
-        </h2>
-      </div>
+        <TypographyPanel displayDate={parseHumanDate(currentDisplay)}>
+          <Typography variant="subtitle1">
+            {`${_.startCase(display)} By State By Date: `}
+          </Typography>
+        </TypographyPanel>
+      </TopPanel>
       <Bar
         atLeastOneToDisplay={atLeastOneToDisplay}
         data={currentDisplay}
