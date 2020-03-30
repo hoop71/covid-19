@@ -25,6 +25,7 @@ const useStyles = makeStyles({
 const Hoop = () => {
   const { height, width } = useWindowSize()
   const classes = useStyles({ height, width })
+  console.log(classes.wrapper)
   return (
     <DisplayContext.Provider value={{ height, width }}>
       <div className={classes.wrapper}>
