@@ -14,8 +14,11 @@ const Bar = ({
   setDisplay,
 }) => {
   const { height, width } = useWindowSize()
-  console.log(`Height: ${height} and Width: ${width}`)
+  console.log(
+    `Height: ${height - height * 0.3} and Width: ${width - width * 0.1}`
+  )
   const { data } = groupedData
+  console.log()
   return (
     <div
       id="needs fixed height"
@@ -23,8 +26,8 @@ const Bar = ({
     >
       {atLeastOneToDisplay ? (
         <NivoBar
-          width={width - width * 0.1}
-          height={height - height * 0.3}
+          width={width * 0.9 || "70vw"}
+          height={height * 0.7 || "70vh"}
           layout="horizontal"
           margin={{ top: 26, right: 120, bottom: 26, left: 100 }}
           data={data}
