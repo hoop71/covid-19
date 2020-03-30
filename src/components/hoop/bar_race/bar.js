@@ -17,14 +17,11 @@ const Bar = ({
 
   const { data } = groupedData
   return (
-    <div
-      id="needs fixed height"
-      style={{ height: height * 0.7, minHeight: "30vh" }}
-    >
+    <div id="needs fixed height" style={{ height: height * 0.6 || "60vh" }}>
       {atLeastOneToDisplay ? (
         <NivoBar
-          width={width * 0.9}
-          height={height * 0.7}
+          width={width * 0.9 || "90vw"}
+          height={height * 0.6 || "70vw"}
           layout="horizontal"
           margin={{ top: 25, right: 120, bottom: 100, left: 220 }}
           data={data}
