@@ -1,6 +1,5 @@
 // React
 import React from "react"
-import { useWindowSize } from "@reach/window-size"
 
 // Material
 import { makeStyles } from "@material-ui/core"
@@ -15,18 +14,13 @@ const useStyles = makeStyles({
     padding: "2em",
     justifyContent: "center",
     flexDirection: "column",
-    height: ({ height }) => {
-      return { height: height - 100 }
-    },
-    width: ({ width }) => {
-      return { width: width - width * 0.1 }
-    },
+    height: "100%",
+    width: "100%",
   },
 })
 
 const Hoop = () => {
-  const { height, width } = useWindowSize()
-  const classes = useStyles({ height, width })
+  const classes = useStyles()
   return (
     <div className={classes.wrapper}>
       <BarRace />

@@ -2,7 +2,7 @@
 import React from "react"
 
 // Material
-import { makeStyles } from "@material-ui/core"
+import { Container, Grid, makeStyles } from "@material-ui/core"
 
 const useTypographyPanelStyles = makeStyles({
   wrapper: {
@@ -34,9 +34,9 @@ const useStyles = makeStyles({
 const TopPanel = ({ children }) => {
   const classes = useStyles()
   return (
-    <div className={classes.wrapper}>
+    <Grid item>
       <div className={classes.headerWrapper}>{children}</div>
-    </div>
+    </Grid>
   )
 }
 

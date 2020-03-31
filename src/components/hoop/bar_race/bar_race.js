@@ -13,8 +13,7 @@ import TopPanel, {
 } from "./top_panel"
 
 // Material
-import Paper from "@material-ui/core/Paper"
-import Typography from "@material-ui/core/Typography"
+import { Grid, Typography } from "@material-ui/core"
 
 // Custom Hooks
 import { useTimer } from "./utils/hooks"
@@ -34,7 +33,7 @@ const BarDataWrapper = ({ data }) => {
   const atLeastOneToDisplay = _.size(currentDisplay)
 
   return (
-    <Paper elevation={4}>
+    <Grid alignItems="center" container direction="column" justify="center">
       <TopPanel>
         <ToggleContainer display={display} setDisplay={setDisplay} />
         <DatePicker startDate={startDate} setStartDate={setStartDate} />
@@ -53,7 +52,7 @@ const BarDataWrapper = ({ data }) => {
         display={display}
         setDisplay={setDisplay}
       />
-    </Paper>
+    </Grid>
   )
 }
 

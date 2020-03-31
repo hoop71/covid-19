@@ -13,6 +13,7 @@ import { makeStyles } from "@material-ui/core"
 
 const useStyles = makeStyles(() => ({
   linkWrapper: {
+    height: "100%",
     display: "flex",
     justifyContent: "space-around",
   },
@@ -21,7 +22,7 @@ const useStyles = makeStyles(() => ({
 const IndexPage = ({ data }) => {
   const classes = useStyles()
   return (
-    <Layout>
+    <Layout style={{ background: "red", height: "100%" }}>
       <SEO title="Home" />
       <div className={classes.linkWrapper}>
         <Link to="/elijah/" activeStyle={{ color: "red" }}>
@@ -29,6 +30,9 @@ const IndexPage = ({ data }) => {
         </Link>
         <Link to="/hoop/" activeStyle={{ color: "red" }}>
           Hoop
+        </Link>
+        <Link to="/responsive/" activeStyle={{ color: "red" }}>
+          Responsive
         </Link>
       </div>
     </Layout>

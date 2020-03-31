@@ -1,8 +1,5 @@
 import React from "react"
 
-// Context
-import { useWindowSize } from "@reach/window-size"
-
 // Components
 import { Bar as NivoBar } from "@nivo/bar"
 import BarComponent from "./bar_component"
@@ -13,15 +10,13 @@ const Bar = ({
   display,
   setDisplay,
 }) => {
-  const { height, width } = useWindowSize()
-
   const { data } = groupedData
   return (
-    <div id="needs fixed height" style={{ height: height * 0.6 || "60vh" }}>
+    <div id="needs fixed height" style={{ height: "60vh" }}>
       {atLeastOneToDisplay ? (
         <NivoBar
-          width={width * 0.9 || "90vw"}
-          height={height * 0.6 || "70vw"}
+          width={800}
+          height={500}
           layout="horizontal"
           margin={{ top: 25, right: 120, bottom: 100, left: 220 }}
           data={data}
@@ -44,9 +39,7 @@ const Bar = ({
           motionDamping={26}
         />
       ) : (
-        <h1 style={{ height: height * 0.7 || "30vh" }}>
-          No Cases Reported For This Date
-        </h1>
+        <h1 style={{ height: "30vh" }}>No Cases Reported For This Date</h1>
       )}
     </div>
   )

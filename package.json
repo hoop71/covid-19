@@ -10,7 +10,6 @@
     "@material-ui/pickers": "^3.2.10",
     "@nivo/bar": "^0.61.1",
     "@nivo/line": "^0.61.1",
-    "@reach/window-size": "^0.9.0",
     "covid-19-data": "https://github.com/nytimes/covid-19-data.git",
     "date-fns": "^2.10.0",
     "gatsby": "^2.19.45",
