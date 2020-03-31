@@ -1,12 +1,21 @@
 html {
+  height: 100%;
+  margin: 0;
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
 }
-body {
+body,
+#___gatsby,
+#gatsby-focus-wrapper {
+  height: 100%;
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+div[role="group"][tabindex] {
+  height: 100%;
 }
 article,
 aside,
