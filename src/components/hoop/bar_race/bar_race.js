@@ -29,14 +29,18 @@ const BarDataWrapper = ({ data }) => {
   const [startDate, setStartDate] = useState(fiveDaysAgo)
   const currentDisplay = useTimer({ data, startDate, display })
 
-  // Do we at least have some data to showp?
+  // Do we at least have some data to show?
   const atLeastOneToDisplay = _.size(currentDisplay)
 
   return (
     <Grid alignItems="center" container direction="column" justify="center">
       <TopPanel>
         <ToggleContainer display={display} setDisplay={setDisplay} />
-        <DatePicker startDate={startDate} setStartDate={setStartDate} />
+        <DatePicker
+          maxEndDate={_.max(_.keys(data))}
+          startDate={startDate}
+          setStartDate={setStartDate}
+        />
         <TypographyPanel>
           <Typography variant="subtitle1">
             {`${_.startCase(display)} By State By Date: `}

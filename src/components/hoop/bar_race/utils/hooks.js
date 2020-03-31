@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState, useMemo } from "react"
 import _ from "lodash"
 import { format } from "date-fns"
 
@@ -27,9 +27,14 @@ const getByDisplay = ({ data, display, startDate }) => {
 
 export const useTimer = ({ data, display, startDate }) => {
   const [current, setCurrent] = useState(0)
+  const byDisplay = useMemo(() => getByDisplay({ data, display, startDate }), [
+    data,
+    display,
+    startDate,
+  ])
+
   const startDateRef = useRef(format(startDate, "yyyy/MM/dd"))
 
-  const byDisplay = getByDisplay({ data, display, startDate })
   useEffect(() => {
     const formattedStartDate = format(startDate, "yyyy/MM/dd")
     let timer
@@ -38,9 +43,13 @@ export const useTimer = ({ data, display, startDate }) => {
       startDateRef.current !== formattedStartDate
     ) {
       startDateRef.current = formattedStartDate
-      timer = setTimeout(() => {
-        setCurrent(0)
-      }, 1500)
+      timer = setTimeout(
+        () => {
+          setCurrent(0)
+        },
+        // If it's the last index, pause before restart, otherwise, next-tick
+        current === _.size(byDisplay) - 1 ? 1200 : 1
+      )
     } else {
       timer = setTimeout(() => {
         setCurrent(current + 1)
@@ -48,5 +57,6 @@ export const useTimer = ({ data, display, startDate }) => {
     }
     return () => clearTimeout(timer)
   }, [current, data, byDisplay, startDate])
-  return _.get(byDisplay, `${current}`, [])
+
+  return _.get(byDisplay, `${current}`, byDisplay[0])
 }
