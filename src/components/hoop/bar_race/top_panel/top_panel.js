@@ -2,7 +2,7 @@
 import React from "react"
 
 // Material
-import { Container, Grid, makeStyles } from "@material-ui/core"
+import { Grid, makeStyles } from "@material-ui/core"
 
 const useTypographyPanelStyles = makeStyles({
   wrapper: {

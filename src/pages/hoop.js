@@ -2,30 +2,38 @@
 import React from "react"
 
 // Material
-import { makeStyles } from "@material-ui/core"
+import { Grid, makeStyles, Paper } from "@material-ui/core"
 
-// Components
-// import LineGraph from "../components/hoop/line-graph"
+// Nivo
 import BarRace from "../components/hoop/bar_race"
 
-const useStyles = makeStyles({
-  wrapper: {
-    display: "flex",
-    padding: "2em",
-    justifyContent: "center",
-    flexDirection: "column",
+const useStyles = makeStyles(theme => ({
+  layout: {},
+  root: {
+    padding: "1.5em",
+    flexGrow: 1,
     height: "100%",
-    width: "100%",
+    background: "aliceblue",
   },
-})
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: "center",
+    color: theme.palette.text.secondary,
+  },
+}))
 
-const Hoop = () => {
+export default function FullWidthGrid() {
   const classes = useStyles()
+
   return (
-    <div className={classes.wrapper}>
-      <BarRace />
+    <div className={classes.root}>
+      <Grid container spacing={3}>
+        <Grid item xs={12}>
+          <Paper className={classes.paper}>
+            <BarRace />
+          </Paper>
+        </Grid>
+      </Grid>
     </div>
   )
 }
-
-export default Hoop

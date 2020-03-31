@@ -31,9 +31,6 @@ const IndexPage = ({ data }) => {
         <Link to="/hoop/" activeStyle={{ color: "red" }}>
           Hoop
         </Link>
-        <Link to="/responsive/" activeStyle={{ color: "red" }}>
-          Responsive
-        </Link>
       </div>
     </Layout>
   )

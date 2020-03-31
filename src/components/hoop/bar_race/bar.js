@@ -1,7 +1,8 @@
+// React
 import React from "react"
 
 // Components
-import { Bar as NivoBar } from "@nivo/bar"
+import { ResponsiveBar as NivoBar } from "@nivo/bar"
 import BarComponent from "./bar_component"
 
 const Bar = ({
@@ -12,13 +13,11 @@ const Bar = ({
 }) => {
   const { data } = groupedData
   return (
-    <div id="needs fixed height" style={{ height: "60vh" }}>
+    <div id="needs fixed height" style={{ height: "60vh", width: "90%" }}>
       {atLeastOneToDisplay ? (
         <NivoBar
-          width={800}
-          height={500}
           layout="horizontal"
-          margin={{ top: 25, right: 120, bottom: 100, left: 220 }}
+          margin={{ top: 25, right: 100, bottom: 100, left: 100 }}
           data={data}
           indexBy="id"
           keys={["value"]}
