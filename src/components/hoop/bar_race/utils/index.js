@@ -1,13 +1,10 @@
-import { format, parseISO } from "date-fns"
-
-// Consts
-const fiveDaysInMillisecons = 4.32e8
+import { addDays, format, parseISO, subDays } from "date-fns"
 
 // Helpers
-export const fiveDaysAgo = new Date(new Date() - fiveDaysInMillisecons)
+export const getFiveDaysAgo = () => subDays(new Date(), 5)
 
 export const parseHumanDate = currentDisplay =>
-  format(parseISO(currentDisplay.date), "iiii, MMMM do, yyyy")
+  format(parseISO(currentDisplay.date), "iii, MMMM do, yyyy")
 
-export const getNTYShortDate = dateToFormat =>
-  format(parseISO(dateToFormat), "yyyy-MM-dd")
+export const getNYTShortDate = dateToFormat =>
+  format(addDays(parseISO(dateToFormat), 1), "yyyy-MM-dd")

@@ -22,11 +22,12 @@ import { useTimer } from "./utils/hooks"
 import _ from "lodash"
 
 // Utils
-import { fiveDaysAgo, parseHumanDate } from "./utils"
+import { getFiveDaysAgo, parseHumanDate } from "./utils"
 
 const BarDataWrapper = ({ data }) => {
+  const dataDateKeys = _.keys(data)
   const [display, setDisplay] = useState("cases")
-  const [startDate, setStartDate] = useState(fiveDaysAgo)
+  const [startDate, setStartDate] = useState(getFiveDaysAgo())
   const currentDisplay = useTimer({ data, startDate, display })
 
   // Do we at least have some data to show?
@@ -37,7 +38,7 @@ const BarDataWrapper = ({ data }) => {
       <TopPanel>
         <ToggleContainer display={display} setDisplay={setDisplay} />
         <DatePicker
-          maxEndDate={_.max(_.keys(data))}
+          maxEndDate={_.max(dataDateKeys)}
           startDate={startDate}
           setStartDate={setStartDate}
         />

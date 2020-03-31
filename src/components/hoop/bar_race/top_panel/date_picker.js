@@ -3,7 +3,7 @@ import React from "react"
 import DateFnsUtils from "@date-io/date-fns"
 
 import { makeStyles } from "@material-ui/core"
-import { getNTYShortDate } from "../utils"
+import { getNYTShortDate } from "../utils"
 
 import {
   MuiPickersUtilsProvider,
@@ -22,7 +22,6 @@ const DatePicker = ({ maxEndDate, startDate, setStartDate }) => {
   const handleSetStartDate = date => {
     setStartDate(date)
   }
-  console.log(maxEndDate)
   return (
     <div className={classes.wrapper}>
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -31,7 +30,7 @@ const DatePicker = ({ maxEndDate, startDate, setStartDate }) => {
           margin="normal"
           id="start-date-picker"
           minDate={"2020-01-21"}
-          maxDate={getNTYShortDate(maxEndDate)}
+          maxDate={getNYTShortDate(maxEndDate)}
           label="Choose Start Date"
           value={startDate}
           onChange={handleSetStartDate}

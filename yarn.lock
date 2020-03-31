@@ -3541,7 +3541,7 @@ cosmiconfig@^6.0.0:
 
 "covid-19-data@https://github.com/nytimes/covid-19-data.git":
   version "0.0.0"
-  resolved "https://github.com/nytimes/covid-19-data.git#81a3abef458866d76cc5b25ebe951b7a3e4e7a15"
+  resolved "https://github.com/nytimes/covid-19-data.git#99b30cbf4181e35bdcc814e2b29671f38d7860a7"
 
 create-ecdh@^4.0.0:
   version "4.0.3"

@@ -38,25 +38,31 @@ export const useTimer = ({ data, display, startDate }) => {
   useEffect(() => {
     const formattedStartDate = format(startDate, "yyyy/MM/dd")
     let timer
-    if (
-      current === _.size(byDisplay) - 1 ||
-      startDateRef.current !== formattedStartDate
-    ) {
+
+    console.log("StartDate: ", formattedStartDate)
+    console.log(startDateRef.current)
+    if (current === _.size(byDisplay) - 1) {
+      console.log("current === end, last date")
       startDateRef.current = formattedStartDate
-      timer = setTimeout(
-        () => {
-          setCurrent(0)
-        },
-        // If it's the last index, pause before restart, otherwise, next-tick
-        current === _.size(byDisplay) - 1 ? 1200 : 1
-      )
+      // If it's the last index, pause before restart
+      timer = setTimeout(() => {
+        setCurrent(0)
+      }, 1200)
+    } else if (startDateRef.current !== formattedStartDate) {
+      console.log("date change")
+      startDateRef.current = formattedStartDate
+      // If it's the last index, pause before restart, otherwise, next-tick
+      timer = setTimeout(() => {
+        setCurrent(-1)
+      }, 0)
     } else {
+      console.log("same same next tick")
       timer = setTimeout(() => {
         setCurrent(current + 1)
       }, 800)
     }
     return () => clearTimeout(timer)
   }, [current, data, byDisplay, startDate])
-
+  console.log(_.get(byDisplay, `${current}`))
   return _.get(byDisplay, `${current}`, byDisplay[0])
 }
